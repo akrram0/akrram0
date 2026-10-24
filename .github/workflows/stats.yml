@@ -1,0 +1,54 @@
+name: stats
+
+on:
+  schedule:
+    # daily, 00:20 UTC
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "scripts/**"
+      - ".github/workflows/stats.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stats-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # full history keeps the rebase-before-push step reliable
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate stats cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/generate-stats.mjs
+
+      - name: Commit refreshed cards
+        run: |
+          git add assets/stats-light.svg assets/stats-dark.svg
+          if git diff --cached --quiet; then
+            echo "stats are up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh github stats"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME"
+          git push
