@@ -38,7 +38,19 @@ jobs:
       - name: Generate stats cards
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/generate-stats.mjs
+        run: |
+          set +e
+          node scripts/generate-stats.mjs 2>&1 | tee stats.log
+          code=${PIPESTATUS[0]}
+          exit "$code"
+
+      - name: Explain failure
+        if: failure()
+        run: |
+          echo '### stats generation failed' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f stats.log ]; then tail -40 stats.log; else echo "no stats.log"; fi >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit refreshed cards
         run: |
