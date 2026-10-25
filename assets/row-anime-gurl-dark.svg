@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" width="1200" height="120" role="img" aria-label="anime-gurl — transparent, always-on-top anime desktop mascot. reacts to music. electron. github.com/akrram0/anime-gurl">
+  <title>project 04: anime-gurl</title>
+  <defs>
+    <style>
+      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    </style>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#ffffff" fill-opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="120" fill="#0d1117"/>
+  <rect x="0" y="0" width="1200" height="120" fill="url(#grid)"/>
+
+  <text class="mono" x="72" y="54" font-size="17" font-weight="500" letter-spacing="1.2" fill="#8b949e">04</text>
+  <text class="mono" x="136" y="54" font-size="34" font-weight="700" letter-spacing="-0.6" fill="#e6edf3">anime-gurl</text>
+  <text class="mono" x="1128" y="54" text-anchor="end" font-size="17" font-weight="500" letter-spacing="1.2" fill="#8b949e">electron</text>
+  <text class="mono" x="136" y="88" font-size="21" font-weight="400" letter-spacing="0.2" fill="#c9d1d9">transparent, always-on-top anime desktop mascot. reacts to music.</text>
+  <text class="mono" x="1128" y="88" text-anchor="end" font-size="20" letter-spacing="0" fill="#8b949e">&#8599;</text>
+
+  <line x1="72" y1="119" x2="1128" y2="119" stroke="#ffffff" stroke-opacity="0.10" stroke-width="1"/>
+</svg>
