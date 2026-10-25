@@ -36,7 +36,7 @@ const THEMES = {
     empty: '#ebe8e1',
   },
   dark: {
-    bg: '#161b22',
+    bg: '#0d1117',
     ink: '#e6edf3',
     body: '#c9d1d9',
     muted: '#8b949e',
@@ -437,10 +437,10 @@ function renderCard(stats, themeName) {
   const login = esc(stats.login);
 
   const cells = [];
-  const heatX = 24;
-  const heatY = 132;
-  const cellSize = 8;
-  const step = 11;
+  const heatX = 72;
+  const heatY = 236;
+  const cellSize = 14;
+  const step = 20;
 
   stats.weeks.forEach((week, wi) => {
     week.days.forEach((day, di) => {
@@ -448,7 +448,7 @@ function renderCard(stats, themeName) {
       const x = heatX + wi * step;
       const y = heatY + di * step;
       cells.push(
-        `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="1.5" fill="${fill}"/>`,
+        `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${fill}"/>`,
       );
     });
   });
@@ -464,9 +464,9 @@ function renderCard(stats, themeName) {
     if (month === lastMonth) return;
     lastMonth = month;
     const x = heatX + wi * step;
-    if (x - lastLabelX < 20 || x + 26 > 880 - 24) return;
+    if (x - lastLabelX < 34 || x + 34 > 1200 - 72) return;
     monthLabels.push(
-      `<text x="${x}" y="125" font-size="8.5" fill="${t.muted}" letter-spacing="0.04em">${monthNames[month]}</text>`,
+      `<text x="${x}" y="226" font-size="12" fill="${t.muted}" letter-spacing="0.08em">${monthNames[month]}</text>`,
     );
     lastLabelX = x;
   });
@@ -476,16 +476,16 @@ function renderCard(stats, themeName) {
     `${stats.currentStreak} day current streak.`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="230" viewBox="0 0 880 230" role="img" aria-labelledby="title desc" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <title id="title">GitHub activity for ${login}</title>
   <desc id="desc">${esc(description)}</desc>
-  <rect x="0.5" y="0.5" width="879" height="229" rx="12" fill="${t.bg}" stroke="${t.border}" stroke-width="1"/>
-  <text x="24" y="32" font-size="11" fill="${t.muted}" letter-spacing="0.10em">// activity</text>
-  <text x="856" y="32" text-anchor="end" font-size="10" fill="${t.muted}" letter-spacing="0.06em">last 12 months</text>
-  <line x1="24" y1="44" x2="856" y2="44" stroke="${t.border}" stroke-width="1"/>
-  <text x="24" y="92" font-size="34" font-weight="600" fill="${t.ink}" letter-spacing="-0.02em">${totalLabel}</text>
-  <text x="24" y="111" font-size="11.5" fill="${t.muted}" letter-spacing="0.08em">contributions</text>
-  <text x="856" y="94" text-anchor="end" font-size="12.5" fill="${t.muted}"><tspan font-size="15" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.repos))}</tspan> repos<tspan dx="16" font-size="15" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.stars))}</tspan> stars<tspan dx="16" font-size="15" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.currentStreak))}</tspan> day streak</text>
+  <rect x="0" y="0" width="1200" height="400" fill="${t.bg}"/>
+  <text x="72" y="92" font-size="20" fill="${t.muted}" letter-spacing="1.2">// activity</text>
+  <text x="1128" y="92" text-anchor="end" font-size="17" fill="${t.muted}" letter-spacing="0.8">last 12 months</text>
+  <line x1="72" y1="112" x2="1128" y2="112" stroke="${t.border}" stroke-width="1"/>
+  <text x="72" y="170" font-size="46" font-weight="600" fill="${t.ink}" letter-spacing="-1.5">${totalLabel}</text>
+  <text x="72" y="194" font-size="16" fill="${t.muted}" letter-spacing="1.2">contributions</text>
+  <text x="1128" y="170" text-anchor="end" font-size="15" fill="${t.muted}"><tspan font-size="22" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.repos))}</tspan> repos<tspan dx="24" font-size="22" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.stars))}</tspan> stars<tspan dx="24" font-size="22" font-weight="600" fill="${t.ink}">${esc(formatNumber(stats.currentStreak))}</tspan> day streak</text>
   ${monthLabels.join('\n  ')}
   ${cells.join('\n  ')}
 </svg>

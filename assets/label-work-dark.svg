@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 84" width="1200" height="84" role="img" aria-label="selected work">
+  <text x="72" y="44" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="20" font-weight="500" letter-spacing="1.2" fill="#8b949e">// selected work</text>
+  <text x="1128" y="44" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" letter-spacing="0.8" fill="#8b949e">04 builds</text>
+  <line x1="72" y1="64" x2="1128" y2="64" stroke="#ffffff" stroke-opacity="0.10" stroke-width="1"/>
+</svg>

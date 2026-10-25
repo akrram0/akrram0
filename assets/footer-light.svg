@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 180" width="1200" height="180" role="img" aria-label="still building — morocco, 2026">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#000000" fill-opacity="0.05"/>
+    </pattern>
+    <pattern id="halftone" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1.7" fill="#53366b" fill-opacity="0.20"/>
+    </pattern>
+    <radialGradient id="fade" cx="0.12" cy="0.9" r="0.75">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="field">
+      <rect x="0" y="0" width="1200" height="180" fill="url(#fade)"/>
+    </mask>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="180" fill="#faf7f0"/>
+  <rect x="0" y="0" width="1200" height="180" fill="url(#grid)"/>
+  <rect x="0" y="0" width="1200" height="180" fill="url(#halftone)" mask="url(#field)"/>
+
+  <text x="72" y="86" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="44" font-weight="600" letter-spacing="-1" fill="#111111">still building.</text>
+  <text x="72" y="140" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="0.8" fill="#666666">// eof</text>
+  <text x="1128" y="140" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="0.8" fill="#666666">morocco &#183; 2026 &#183; github.com/akrram0</text>
+</svg>
