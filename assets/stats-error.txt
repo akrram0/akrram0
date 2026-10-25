@@ -1,1 +1,0 @@
-error: contribution calendar week 52 does not have 7 days.

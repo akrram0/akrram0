@@ -224,29 +224,30 @@ function normalizeCalendar(calendar) {
     throw new Error('contributionCalendar.weeks is missing or empty.');
   }
   const weeks = calendar.weeks.map((week, wi) => {
-    if (
-      !week ||
-      !Array.isArray(week.contributionDays) ||
-      week.contributionDays.length !== 7
-    ) {
-      throw new Error(`contribution calendar week ${wi} does not have 7 days.`);
+    const raw = week && week.contributionDays;
+    if (!Array.isArray(raw) || raw.length < 1 || raw.length > 7) {
+      throw new Error(`contribution calendar week ${wi} has ${raw?.length ?? 0} days.`);
     }
-    return {
-      days: week.contributionDays.map((day, di) => {
-        if (!day || !/^\d{4}-\d{2}-\d{2}$/.test(String(day.date))) {
-          throw new Error(`invalid contribution day date at week ${wi}, day ${di}.`);
-        }
-        const count = Number(day.contributionCount);
-        if (!Number.isFinite(count) || count < 0) {
-          throw new Error(`invalid contribution count for ${day.date}.`);
-        }
-        return {
-          date: day.date,
-          count,
-          weekday: Number.isInteger(day.weekday) ? day.weekday : di,
-        };
-      }),
-    };
+    const days = raw.map((day, di) => {
+      if (!day || !/^\d{4}-\d{2}-\d{2}$/.test(String(day.date))) {
+        throw new Error(`invalid contribution day date at week ${wi}, day ${di}.`);
+      }
+      const count = Number(day.contributionCount);
+      if (!Number.isFinite(count) || count < 0) {
+        throw new Error(`invalid contribution count for ${day.date}.`);
+      }
+      return {
+        date: day.date,
+        count,
+        weekday: Number.isInteger(day.weekday) ? day.weekday : di,
+      };
+    });
+    // The in-progress week is returned up to today only; pad the rest with zeros.
+    while (days.length < 7) {
+      const last = days[days.length - 1];
+      days.push({ date: addDays(last.date, 1), count: 0, weekday: days.length });
+    }
+    return { days };
   });
   return weeks;
 }

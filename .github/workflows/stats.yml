@@ -51,12 +51,6 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           if [ -f stats.log ]; then tail -40 stats.log; else echo "no stats.log"; fi >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
-          if [ -f stats.log ]; then cp stats.log assets/stats-error.txt; else echo "no stats.log" > assets/stats-error.txt; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats-error.txt
-          git commit -m "chore: capture stats error [skip ci]" || true
-          git push || true
 
       - name: Commit refreshed cards
         run: |
